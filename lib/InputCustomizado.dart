@@ -28,17 +28,17 @@ class InputCustomizado extends StatelessWidget {
           ),
         ],
       ),
-      /*  decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey[200],
-                            blurRadius: 15,
-                            spreadRadius: 4,
-                          ),
-                        ],
-                      ), */
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey[200],
+            blurRadius: 15,
+            spreadRadius: 4,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:ishow_app/BotaoAnimado.dart';
 import 'package:ishow_app/InputCustomizado.dart';
 import 'package:flutter/scheduler.dart' as timeDilation;
 
@@ -19,7 +20,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: Duration(milliseconds: 500),
+      duration: Duration(seconds: 1),
       vsync: this,
     );
     _animationBlur = Tween<double>(
@@ -44,9 +45,15 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     /* fazendo a execução da animação ser em camera lenta */
-    timeDilation.timeDilation = 8;
+    timeDilation.timeDilation = 10;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
@@ -121,36 +128,8 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                     SizedBox(
                       height: 20,
                     ),
-                    /* InkWell é um widget que permite clicar sobre ele, parecido como gesturedetector, só que aplicamos em um objeto retangular, funciona como botão  */
-                    AnimatedBuilder(
-                      animation: _animationSize,
-                      builder: (context, widget) {
-                        return InkWell(
-                          onTap: () {},
-                          child: Container(
-                            height: 50,
-                            width: _animationSize.value,
-                            child: Center(
-                              child: Text(
-                                "entar",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromRGBO(255, 100, 127, 1),
-                                  Color.fromRGBO(255, 123, 145, 1),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+                    BotaoAnimado(
+                      controller: _controller,
                     ),
                     SizedBox(
                       height: 20,
@@ -160,8 +139,9 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                       child: Text(
                         "Esqueci minha senha",
                         style: TextStyle(
-                            color: Color.fromRGBO(255, 100, 127, 1),
-                            fontWeight: FontWeight.bold),
+                          color: Color.fromRGBO(255, 100, 127, 1),
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
